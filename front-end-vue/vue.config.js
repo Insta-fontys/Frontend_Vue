@@ -1,3 +1,6 @@
 module.exports = {
-    publicPath: '/frontend-application'
+    publicPath: '/frontend-application',
+    configureWebpack:{
+        devtool: 'source-map'
+    }
 }
