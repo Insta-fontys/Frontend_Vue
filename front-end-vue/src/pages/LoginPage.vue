@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import api from '../wrappers/Authentication.js'
+import api from '../wrappers/AuthenticationWrapper.js'
 
 export default {
     data(){
@@ -25,6 +25,12 @@ export default {
 
             const response = await api.signIn(loginCred);
             localStorage.setItem('jwt', response.token)
+            if(this.$route.params.nextUrl != null) {
+                this.$router.push(this.$route.params.nextUrl)
+            }
+            else {
+                this.$router.push('home')
+            }
         }
     }
 }
