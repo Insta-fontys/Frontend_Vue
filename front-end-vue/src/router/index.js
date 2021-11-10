@@ -1,8 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import JwtManager from '../JwtManager.js'
 
 //import pages
 import LoginPage from '../pages/LoginPage'
+import RegisterPage from '../pages/RegisterPage'
 import HomePage from '../pages/HomePage'
+import CreatePostPage from '../pages/CreatePostPage'
 
 const routes = [
   {
@@ -14,6 +17,19 @@ const routes = [
     path: '/home',
     name: 'home',
     component: HomePage,
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterPage
+  },
+  {
+    path: '/createPost',
+    name: 'createPost',
+    component: CreatePostPage,
     meta:{
       requiresAuth: true
     }
@@ -49,8 +65,9 @@ router.beforeEach((to, from, next) => {
       })
     } 
     else {
-      const claims = parseJwt(localStorage.getItem("jwt"))
-      const isExpired = checkExpiration(claims["exp"])
+      const claims = JwtManager.parseJwt(localStorage.getItem("jwt"))
+      const isExpired = JwtManager.checkExpiration(claims["exp"])
+      console.log(JwtManager.getRole())
 
       if(isExpired){
         localStorage.removeItem("jwt")
@@ -77,25 +94,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-
-//Get claims from JWT
-function parseJwt (token) {
-  const base64Url = token.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
-
-  return JSON.parse(jsonPayload);
-}
-
-//Check expiration date of JWT
-function checkExpiration (exp) {
-  const expDate = new Date(exp * 1000)
-  const currentDate = new Date()
-
-  return expDate.getTime() <= currentDate.getTime();
-}
-
 
 export default router
