@@ -46,5 +46,20 @@ export default{
         return{
             response
         }
+    },
+
+    async getPosts(){
+        var response;
+
+        try{
+            response = await axios.get(`${baseUrl}/api/Post`, apiConfig)
+        }
+        catch(error){
+            response = error.response
+        }
+
+        return{
+            response
+        }
     }
 }
