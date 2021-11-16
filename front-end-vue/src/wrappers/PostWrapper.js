@@ -57,9 +57,9 @@ export default{
         catch(error){
             response = error.response
         }
-
+        console.log(response.data);
         return{
-            response
+            response: response.data
         }
     }
 }
