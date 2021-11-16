@@ -1,11 +1,12 @@
 <template>
-    <input type="file" accept="image/jpeg/*" />
+    <input type="file" accept="image/jpeg/*" @change="convertImage"/>
     <input type="text" placeholder="description" v-model="description"/>
     <button @click="postImage">Post</button>
 </template>
 
 <script>
 import api from '../wrappers/PostWrapper.js'
+import ImageConverter from "../ImageConverter";
 
     export default{
         data(){
@@ -17,13 +18,25 @@ import api from '../wrappers/PostWrapper.js'
 
         methods:{
             async postImage(){
+                await this.convertImage();
+                await api.PostImage(this.description, this.image);
+            },
+            
+            onChange(){
                 const file = document.querySelector('input[type=file]').files[0]
-                const form = new FormData();
+                console.log(ImageConverter.convertImage(file));
+            },
 
-                form.append('description', 'hello sir');
-                form.append('image', file, 'hello')
+            async convertImage(){
+                const file = document.querySelector('input[type=file]').files[0]
+                const reader = new FileReader()
 
-                await api.UploadImage(form)
+                let rawImg;
+                reader.onloadend = () => {
+                    rawImg = reader.result;
+                    this.image = rawImg;  
+                }
+                return reader.readAsDataURL(file);
             }
         }
     }
