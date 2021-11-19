@@ -1,6 +1,6 @@
 <template>
     <div :key="post.id" v-for="post in posts">
-        <Post :post="post"/>
+        <Post @like-post="like(post)" :post="post"/>
     </div>
 </template>
 
@@ -13,6 +13,14 @@ import Post from '../components/Post.vue'
         },
         components:{
             Post
-        }
+        },
+        methods:{
+            like(post){
+                console.log("hehehehe" + post.id)
+                this.$emit('test', post)
+
+            }
+        },
+        emits: ["test"],
     }
 </script>

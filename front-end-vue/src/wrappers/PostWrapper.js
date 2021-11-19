@@ -59,5 +59,17 @@ export default{
         }
         return response.data
         
+    },
+
+    async likePost(post){
+        var response;
+
+        try{
+            response = await axios.put(`${baseUrl}/api/Post/id`, post, apiConfig)
+        }
+        catch(error){
+            return error.response
+        }
+        return response.data
     }
 }

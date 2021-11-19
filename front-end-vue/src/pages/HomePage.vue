@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Posts :posts="imagePosts"/>
+        <Posts @test="likePost" :posts="imagePosts"/>
     </div>
 </template>
 
@@ -30,6 +30,11 @@ import Posts from '../components/Posts.vue'
                 //Object.keys(response).forEach(key => this.imagePosts.push(response[key]))
                 this.imagePosts = response
                 console.log("Images = " + this.imagePosts)
+            },
+            async likePost(post){
+                console.log("id " + post.id)
+                console.log("data = " + post)
+                await api.likePost(post)
             }
         }
     }
