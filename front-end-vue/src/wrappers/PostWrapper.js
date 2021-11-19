@@ -55,11 +55,9 @@ export default{
             response = await axios.get(`${baseUrl}/api/Post`, apiConfig)
         }
         catch(error){
-            response = error.response
+            return error.response
         }
-        console.log(response.data);
-        return{
-            response: response.data
-        }
+        return response.data
+        
     }
 }

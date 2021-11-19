@@ -1,5 +1,5 @@
 <template>
-    <input type="file" accept="image/jpeg/*" @change="convertImage"/>
+    <input type="file" accept="image/jpeg" @change="convertImage"/>
     <input type="text" placeholder="description" v-model="description"/>
     <button @click="postImage">Post</button>
 </template>
