@@ -21,6 +21,10 @@ import api from '../wrappers/RegistrationWrapper.js'
 
         methods: {
             async registerAccount(){
+                if(!this.email || !this.username){
+                    alert("All fields need to be filled in")
+                    return
+                }
                 const payload = {
                     email: this.email,
                     username: this.username
@@ -32,6 +36,8 @@ import api from '../wrappers/RegistrationWrapper.js'
                 else{
                     await api.createCreator(payload)
                 }
+                alert("Account has been created")
+                this.$router.push('login')
             }
         }
     }
