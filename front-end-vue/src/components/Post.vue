@@ -2,15 +2,14 @@
 <div class="panel">
     <div class="topBar">
         <label>{{post.creatorUsername}}</label>
-        <button class="follow" @click="onClickFollow(post.creatorUsername)">Follow</button>
+        <button class="follow" @click="onClickFollow(post.creatorId)">Follow</button>
     </div>
     <div class="content">
         <img class="img" :src="post.image"/>
     </div>
     <div class="contentJudge">
         <div class="likeComment">
-            <button @click="onLikeClick(post.post)">like</button>
-            <i :class="{ 'far fa-heart': !isLiked, 'fas fa-heart': isLiked} " @click="onLikeClick(post.id)"></i>
+            <button @click="onLikeClick(post.post)"><i :class="{ 'far fa-heart': !isLiked, 'fas fa-heart': isLiked}" ></i></button>
             <label>{{post.likes}}</label>
             <i class="far fa-comment"></i>
         </div>
@@ -64,7 +63,7 @@ export default {
             this.$emit('react-post', payload)
         },
         onClickFollow(name){
-            this.$emits('follow', name)
+            this.$emit('follow', name)
         }
     },
     emits:["like-post", "react-post", "follow"],
@@ -145,6 +144,10 @@ export default {
         font-size: .8rem;
         display: inline-flex;
         flex-direction: row;
+    }
+
+    label{
+        font-style: italic;
     }
 
 </style>
