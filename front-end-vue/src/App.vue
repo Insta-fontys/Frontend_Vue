@@ -1,18 +1,32 @@
 <template>
-<Menu/>
+  <Menu v-if="isNotNavigationPage" :prop_name="name" :prop_role="role"/>
   <router-view/>
 </template>
 
 <script>
 import Menu from '../src/components/MenuBar.vue'
+import jwtUtil  from '../src/JwtManager.js'
 
 export default {
     components:{
       Menu
     },
+    data(){
+      return{
+        name: '',
+        role: '',
+      }
+    },
+    methods:{
+      getUserInfo(){
+        this.name = jwtUtil.getName();
+        this.role = jwtUtil.getRole();
+      }
+    },
     computed: {
     isNotNavigationPage() {
       if(this.$route.name !== 'login' && this.$route.name !== 'register'){
+        this.getUserInfo();
         return true;
       }
       return false;
