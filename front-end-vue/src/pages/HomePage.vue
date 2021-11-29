@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Posts @test="likePost" :posts="imagePosts"/>
+        <Posts @test="likePost" @reaction="reaction" @follow="follow" :posts="imagePosts"/>
     </div>
 </template>
 
@@ -16,22 +16,36 @@ import Posts from '../components/Posts.vue'
         },
         data(){
             return{
-                imagePosts: []
+                imagePosts: [],
+                reactions: []
             }
         },
 
         async created(){
             await this.getPosts()
-
         },
         methods: {
             async getPosts(){
                 const response = await api.getPosts()
                 //Object.keys(response).forEach(key => this.imagePosts.push(response[key]))
                 this.imagePosts = response
+                console.log(this.imagePosts)
             },
             async likePost(post){
-                await api.likePost(post)
+                var response =  await api.saveLike(post)
+                if(response)
+                    await api.likePost(post)
+            },
+
+            async reaction(e){
+                await api.react(e)
+            },
+
+            async follow(e){
+                const payload = {
+                    creatorId: e
+                }
+                await 
             }
         }
     }
