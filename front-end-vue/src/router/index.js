@@ -7,6 +7,7 @@ import RegisterPage from '../pages/RegisterPage'
 import HomePage from '../pages/HomePage'
 import CreatePostPage from '../pages/CreatePostPage'
 import BuyTokensPage from '../pages/BuyTokensPage'
+import FollowersPage from '../pages/FollowersPage'
 
 const routes = [
   {
@@ -39,6 +40,14 @@ const routes = [
     path: '/buytokens',
     name: 'buytokens',
     component: BuyTokensPage,
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/followers',
+    name: 'followers',
+    component: FollowersPage,
     meta:{
       requiresAuth: true
     }
