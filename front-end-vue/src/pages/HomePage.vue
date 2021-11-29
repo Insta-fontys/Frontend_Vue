@@ -7,6 +7,7 @@
 <script>
 import api from '../wrappers/PostWrapper.js'
 import Posts from '../components/Posts.vue'
+import followApi from '../wrappers/FollowWrapper.js'
 // import ImagePostComponent from '../components/ImagePostComponent.vue'
 
     export default{
@@ -45,7 +46,8 @@ import Posts from '../components/Posts.vue'
                 const payload = {
                     creatorId: e
                 }
-                await 
+                console.log(payload)
+                await followApi.PostFollow(payload);
             }
         }
     }
