@@ -8,10 +8,6 @@ var apiConfig = {
     }
 }
 
-// const headers = { 
-//     "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
-//   };
-
 export default{
     async PostImage(description, imageinfo){
         const payload = {
@@ -66,6 +62,30 @@ export default{
 
         try{
             response = await axios.put(`${baseUrl}/api/Post/id`, post, apiConfig)
+        }
+        catch(error){
+            return error.response
+        }
+        return response.data
+    },
+
+    async saveLike(post){
+        var response; 
+        
+        try{
+            response = await axios.post(`${baseUrl}/api/SaveLike`, post, apiConfig)
+        }
+        catch(error){
+            return error.response
+        }
+        return response.data
+    },
+
+    async react(reaction){
+        var response;
+
+        try{
+            response - await axios.post(`${baseUrl}/api/Reaction`, reaction, apiConfig)
         }
         catch(error){
             return error.response
