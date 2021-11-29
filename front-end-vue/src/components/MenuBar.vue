@@ -1,11 +1,26 @@
 <template>
     <div class="background">
-        <h1>{{this.name}}</h1>
-        <h2>{{this.role}}</h2>
+        <div class="logo">
+            <img src="../assets/MyGramLogo.png"/>
+        </div>
+        <h1>{{this.prop_name}}</h1>
+        <h2>{{this.prop_role}}</h2>
     <div class="links">
-        <router-link to="/">Home</router-link>
-        <router-link to="/createPost">Create</router-link>
-        <router-link to="/buytokens">Tokens </router-link>
+        <div class="holder">
+            <router-link to="/"><i class="fas fa-home fa-2x icon"></i></router-link>
+        </div>
+        <div class="holder">
+            <router-link to="/createPost"><i class="fas fa-camera fa-2x icon"></i></router-link>
+        </div>
+        <div class="holder">
+            <router-link to="/buytokens"><i class="fas fa-money-bill-wave fa-2x icon"></i> </router-link>
+        </div>
+        <div class="holder">
+            <router-link to="/followers"> <i class="fas fa-users fa-2x icon"></i> </router-link>
+        </div>
+        <div class="holder" @click="logout">
+            <i class="fas fa-sign-out-alt fa-2x icon"></i>
+        </div>
     </div>
     </div>
 </template>
@@ -18,6 +33,17 @@ export default {
             name: '',
             role: ''
         }
+    },
+    props:{
+        prop_name: {default: "name", type: Text},
+        prop_role: {default: "role", type: Text}
+    },
+    methods:{
+        logout(){       
+            console.log("logout")     
+            localStorage.removeItem('jwt')
+            this.$router.push('login')
+        }
     }
 }
 </script>
@@ -25,7 +51,7 @@ export default {
 
 <style scoped>
     .background{
-        background-color: #c0c0c0;
+        background-image: url("../assets/Background.png");
         position:fixed;
         top:0;
         left:0;
@@ -34,8 +60,42 @@ export default {
         height: 100%;
     }
 
+    .logo{
+        margin-top: 5%;
+    }
+
+    img{
+        width: 100%;
+    }
+
+    h1, h2{
+        color:green;
+    }
+
     .links{
         display:flex;
         flex-direction: column;
+    }
+
+    .holder{
+        width: 60%;
+        height: 90%;
+        margin-top: 5px;
+        border: 2px solid white;
+        border-radius: 90px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: black;
+    }
+
+        .holder:hover{
+            cursor: pointer;
+        }
+    
+    .icon{
+        color: white;
+        margin-top: 0;
+        margin-bottom: auto;
+        z-index: 0;
     }
 </style>
