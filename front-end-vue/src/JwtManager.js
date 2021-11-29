@@ -24,6 +24,12 @@ export default{
         const claims = this.parseJwt(localStorage.getItem("jwt"))
         const role = claims["Role"]
         return role
+    },
+
+    getName(){
+        const claims = this.parseJwt(localStorage.getItem("jwt"))
+        const name = claims["Name"]
+        return name
     }
   
 }
