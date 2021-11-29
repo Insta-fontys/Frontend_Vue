@@ -1,18 +1,22 @@
 <template>
     <input type="file" accept="image/jpeg" @change="convertImage"/>
     <input type="text" placeholder="description" v-model="description"/>
+
+    <div id="preview">
+        <img v-if="url" :src="url" />
+    </div>    
     <button @click="postImage">Post</button>
 </template>
 
 <script>
 import api from '../wrappers/PostWrapper.js'
-import ImageConverter from "../ImageConverter";
 
     export default{
         data(){
             return{
                 description: '',
-                image: ''
+                image: '',
+                url: ''
             }
         },
 
@@ -21,16 +25,12 @@ import ImageConverter from "../ImageConverter";
                 await this.convertImage();
                 await api.PostImage(this.description, this.image);
             },
-            
-            onChange(){
-                const file = document.querySelector('input[type=file]').files[0]
-                console.log(ImageConverter.convertImage(file));
-            },
 
             async convertImage(){
                 const file = document.querySelector('input[type=file]').files[0]
                 const reader = new FileReader()
-
+                this.url = URL.createObjectURL(file)
+                
                 let rawImg;
                 reader.onloadend = () => {
                     rawImg = reader.result;
