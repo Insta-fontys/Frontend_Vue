@@ -1,10 +1,27 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/createPost">Create</router-link>
-  </div>
+<Menu/>
   <router-view/>
 </template>
+
+<script>
+import Menu from '../src/components/MenuBar.vue'
+
+export default {
+    components:{
+      Menu
+    },
+    computed: {
+    isNotNavigationPage() {
+      if(this.$route.name !== 'login' && this.$route.name !== 'register'){
+        return true;
+      }
+      return false;
+    }
+  }
+
+}
+</script>
+
 
 <style>
 #app {
