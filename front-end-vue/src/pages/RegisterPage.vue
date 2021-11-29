@@ -1,7 +1,7 @@
 <template>
     <div class="panel">
         <input type="text" v-model="email" placeholder="email"/>
-        <input type="text" v-model="username" placeholder="password"/>
+        <input type="text" v-model="username" placeholder="username"/>
         <input type="checkbox" v-model="isFanAccount"/>
         <button @click="registerAccount">Register </button>
     </div>
