@@ -6,10 +6,13 @@
         <h1>{{this.prop_name}}</h1>
         <h2>{{this.prop_role}}</h2>
     <div class="links">
-        <div class="holder">
+        <div v-if="prop_isCreator" class="holder">
+            <router-link to="/profile"><i class="fas fa-home fa-2x icon"></i></router-link>
+        </div>
+        <div v-else class="holder">
             <router-link to="/"><i class="fas fa-home fa-2x icon"></i></router-link>
         </div>
-        <div class="holder">
+        <div v-if="prop_isCreator" class="holder">
             <router-link to="/createPost"><i class="fas fa-camera fa-2x icon"></i></router-link>
         </div>
         <div class="holder">
@@ -30,20 +33,19 @@
 export default {
     data(){
         return{
-            name: '',
-            role: ''
         }
     },
     props:{
-        prop_name: {default: "name", type: Text},
-        prop_role: {default: "role", type: Text}
+        prop_name: {default: "name", type: String},
+        prop_role: {default: "role", type: String},
+        prop_isCreator: {default: true, type: Boolean}
     },
     methods:{
         logout(){       
             console.log("logout")     
             localStorage.removeItem('jwt')
             this.$router.push('login')
-        }
+        },
     }
 }
 </script>
