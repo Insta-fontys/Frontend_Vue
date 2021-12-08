@@ -30,7 +30,7 @@ export default {
         catch(error){
             response = error.response
         }
-        return response
+        return response.data
     },
     
     async GetFollowings(){
@@ -42,6 +42,6 @@ export default {
         catch(error){
             response = error.response
         }
-        return response
+        return response.data
     }
 }
