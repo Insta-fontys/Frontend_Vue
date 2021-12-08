@@ -40,8 +40,7 @@ export default {
         return{
             isLiked: false,
             reaction: '',
-            message: '',
-            like: 0
+            message: ''
         }
     },
     methods: {
