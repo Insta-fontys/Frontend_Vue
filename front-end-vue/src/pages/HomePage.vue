@@ -30,7 +30,7 @@ import followApi from '../wrappers/FollowWrapper.js'
                 const response = await api.getPosts()
                 //Object.keys(response).forEach(key => this.imagePosts.push(response[key]))
                 this.imagePosts = response
-                console.log(this.imagePosts)
+                console.log("imagePosts = " + this.imagePosts)
             },
             async likePost(post){
                 var response =  await api.saveLike(post)
