@@ -8,6 +8,7 @@ import HomePage from '../pages/HomePage'
 import CreatePostPage from '../pages/CreatePostPage'
 import BuyTokensPage from '../pages/BuyTokensPage'
 import FollowersPage from '../pages/FollowersPage'
+import ProfilePage from '../pages/ProfilePage'
 
 const routes = [
   {
@@ -48,6 +49,14 @@ const routes = [
     path: '/followers',
     name: 'followers',
     component: FollowersPage,
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfilePage,
     meta:{
       requiresAuth: true
     }
