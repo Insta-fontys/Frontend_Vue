@@ -1,5 +1,5 @@
 <template>
-  <Menu v-if="isNotNavigationPage" :prop_name="name" :prop_role="role"/>
+  <Menu v-if="isNotNavigationPage" :prop_name="name" :prop_role="role" :prop_isCreator="isCreator"/>
   <router-view/>
 </template>
 
@@ -15,12 +15,16 @@ export default {
       return{
         name: '',
         role: '',
+        isCreator: true
       }
     },
     methods:{
       getUserInfo(){
         this.name = jwtUtil.getName();
         this.role = jwtUtil.getRole();
+        if(this.role != "creator")
+            this.isCreator = false
+        console.log(this.isCreator)
       }
     },
     computed: {
