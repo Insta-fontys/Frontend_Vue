@@ -17,8 +17,8 @@ const routes = [
     component: LoginPage
   },
   {
-    path: '/home',
-    elias: '/',
+    path: '/',
+    elias: '/home',
     name: 'home',
     component: HomePage,
     meta:{
