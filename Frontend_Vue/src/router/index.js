@@ -18,6 +18,7 @@ const routes = [
   },
   {
     path: '/home',
+    elias: '/',
     name: 'home',
     component: HomePage,
     meta:{
