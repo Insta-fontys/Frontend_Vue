@@ -1,47 +1,75 @@
 <template>
-<div class="panel">
+  <div class="panel">
     <div class="topBar">
-        <label>{{post.creatorUsername}}</label>
-        <button class="follow" @click="onClickFollow(post.creatorId)">Follow</button>
+      <label>{{ post.creatorUsername }}</label>
+      <button
+        class="follow"
+        @click="onClickFollow(post.creatorId)"
+      >
+        Follow
+      </button>
     </div>
     <div class="content">
-        <img class="img" :src="post.image"/>
+      <img
+        class="img"
+        :src="post.image"
+      >
     </div>
     <div class="contentJudge">
-        <div class="likeComment">
-            <button @click="onLikeClick(post.post)"><i :class="{ 'far fa-heart': !isLiked, 'fas fa-heart': isLiked}" ></i></button>
-            <label>{{post.likes}}</label>
-            <i class="far fa-comment"></i>
-        </div>
-        <div class="bookmark">
-            <i class="far fa-bookmark"></i>
-        </div>
+      <div class="likeComment">
+        <button @click="onLikeClick(post.post)">
+          <i :class="{ 'far fa-heart': !isLiked, 'fas fa-heart': isLiked}" />
+        </button>
+        <label>{{ post.likes }}</label>
+        <i class="far fa-comment" />
+      </div>
+      <div class="bookmark">
+        <i class="far fa-bookmark" />
+      </div>
     </div>
     <div class="reaction">
-        <textarea v-model="reaction"/><button @click="onReactionPost()">React</button>
+      <textarea v-model="reaction" /><button @click="onReactionPost()">
+        React
+      </button>
+      <select v-model="donateTokens">
+        <option>0</option>
+        <option>100</option>
+        <option>200</option>
+        <option>300</option>
+        <option>400</option>
+        <option>500</option>
+      </select>
+      <button @click="onClickDonate">
+        Donate
+      </button>
     </div>
     <div class="description">
-            <h3>{{post.description}}</h3>
+      <h3>{{ post.description }}</h3>
     </div> 
-    <div :key="reaction.id" v-for="reaction in post.reactions">
-        <div>{{reaction.message}}</div>
+    <div
+      v-for="reaction in post.reactions"
+      :key="reaction.id"
+    >
+      <div>{{ reaction.message }}</div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'Post',
+    name: 'PostItem',
     props: ['post'],
-    mounted(){
-        console.log(this.post)
-    },
+    emits:["like-post", "react-post", "follow", "donate"],
     data(){
         return{
             isLiked: false,
             reaction: '',
-            message: ''
+            message: '',
+            donateTokens: 0
         }
+    },
+    mounted(){
+        console.log(this.post)
     },
     methods: {
         onLikeClick(value){
@@ -63,9 +91,15 @@ export default {
         },
         onClickFollow(name){
             this.$emit('follow', name)
+        },
+        onClickDonate(){
+            const payload = {
+                amount: this.donateTokens,
+                creatorId: this.post.creatorId
+            };
+            this.$emit('donate', payload)
         }
     },
-    emits:["like-post", "react-post", "follow"],
 }
 </script>
 

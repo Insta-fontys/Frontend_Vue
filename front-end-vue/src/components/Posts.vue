@@ -1,19 +1,29 @@
 <template>
-    <div :key="post.id" v-for="post in posts">
-        <Post @like-post="like(post)" @react-post="test" @follow="follow" :post="post"/>
-    </div>
+  <div
+    v-for="post in posts"
+    :key="post.id"
+  >
+    <Post
+      :post="post"
+      @like-post="like(post)"
+      @react-post="test"
+      @follow="follow"
+      @donate="donate"
+    />
+  </div>
 </template>
 
 <script>
 import Post from '../components/Post.vue'
     export default {
         name: 'Posts',
-        props: {
-            posts: Array
-        },
         components:{
             Post
         },
+        props: {
+            posts: Array
+        },
+        emits: ["test", "reaction", "follow", "donate"],
         async created(){
             console.log("posts = " + this.posts)
         },
@@ -30,8 +40,11 @@ import Post from '../components/Post.vue'
 
             follow(e){
                 this.$emit('follow', e)
+            },
+
+            donate(e){
+                this.$emit('donate', e)
             }
         },
-        emits: ["test", "reaction", "follow"],
     }
 </script>

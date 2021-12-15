@@ -1,6 +1,7 @@
 <template>
+<button @click="goToProfilePage">test</button>
     <div>
-        <Posts @test="likePost" @reaction="reaction" @follow="follow" :posts="imagePosts"/>
+        <Posts @test="likePost" @reaction="reaction" @follow="follow" @donate="donate" :posts="imagePosts"/>
     </div>
 </template>
 
@@ -8,6 +9,7 @@
 import api from '../wrappers/PostWrapper.js'
 import Posts from '../components/Posts.vue'
 import followApi from '../wrappers/FollowWrapper.js'
+import donateApi from '../wrappers/TokenWrapper.js'
 // import ImagePostComponent from '../components/ImagePostComponent.vue'
 
     export default{
@@ -48,6 +50,15 @@ import followApi from '../wrappers/FollowWrapper.js'
                 }
                 console.log(payload)
                 await followApi.PostFollow(payload);
+            },
+
+            async donate(e){
+                await donateApi.donateTokens(e);
+                alert("thank you for your donation")
+            },
+
+            goToProfilePage(){
+                this.$router.push({path: 'profile', query: {username: "admin"}})
             }
         }
     }

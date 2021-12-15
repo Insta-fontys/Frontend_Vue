@@ -24,11 +24,21 @@
 </template>
 
 <script>
+import userApi from '../wrappers/UserWrapper.js'
 export default {
     data(){
         return{
-
+            username: '',
+            posts: [],
+            followers: 0,
+            bio: '',
+            website: ''
         }
+    },
+    async created(){
+        this.username = this.$route.query.username
+
+        await userApi.getUserData(this.username)
     }
 }
 </script>
