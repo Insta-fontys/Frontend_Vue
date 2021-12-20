@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="section" >
-            <p>Register</p>
+            <p @click="goToRegisterPage">Register</p>
             <button class="btn" @click="handleLogIn">Log In</button>
         </div>
     </div>
@@ -35,8 +35,7 @@ export default {
         }
     },
     methods: {
-        async handleLogin(){
-
+        async handleLogIn(){
             const loginCred = {
                 email: this.email,
                 password: this.password
@@ -50,6 +49,9 @@ export default {
             else {
                 this.$router.push('home')
             }
+        },
+        goToRegisterPage(){
+            this.$router.push('register')
         }
     }
 }
@@ -159,6 +161,10 @@ export default {
     .btn:hover{
         transform: scale(1.025);
         box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+    }
+
+    p:hover{
         cursor: pointer;
     }
 </style>
