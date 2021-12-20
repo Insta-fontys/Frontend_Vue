@@ -13,4 +13,4 @@ jobs:
     - name: Lighthouse
       uses: foo-software/lighthouse-check-action@master
       with:
-        urls: 'https://insta-fontys.github.io/Frontend_Vue/login,https://insta-fontys.github.io/Frontend_Vue/home,https://insta-fontys.github.io/Frontend_Vue/buytokens,https://insta-fontys.github.io/Frontend_Vue/followers'
+        urls: 'https://www.google.com/,https://insta-fontys.github.io/Frontend_Vue/login,https://insta-fontys.github.io/Frontend_Vue/home,https://insta-fontys.github.io/Frontend_Vue/buytokens,https://insta-fontys.github.io/Frontend_Vue/followers'
