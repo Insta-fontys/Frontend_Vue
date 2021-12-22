@@ -1,0 +1,19 @@
+name: Testim
+
+on:
+  push:
+    branches: [ main, e2eTesting ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: instinctstudios/testim-cli-gh-action@v0.3.0
+        with:
+          token: ${{ secrets.TESTIM_TOKEN }}
+          project-id: "1rX7h2U3UnxYv71JZ9a1"
