@@ -2,43 +2,57 @@
 <h1>Profile Page</h1>
     <div class="panel">
         <div class="topSection">
-            <div class="imageContainer">
+            <div class="profileimageContainer">
                 <img src="https://picsum.photos/200/300" alt="avatar"/>
             </div>
             <div class="dataContainer">
                 <div class="usernameContainer">
-                    <h2>UserName</h2>
+                    <h2>{{this.username}}</h2>
                 </div>
                 <div class="data">
-                    <label>posts 5 </label>
-                    <label>followers 7 </label>
-                    <label>following 9 </label>
+                    <label>posts: {{this.posts.length}}</label>
+                    <label>followers: {{this.followers.length}} </label>
                 </div>
                 <div class="data">
-                    <label>Bio</label>
-                    <label>Bio</label>
+                    <label>{{this.bio}}</label>
+                    <label>{{this.website}}</label>
                 </div>
+            </div>
+        </div>
+        <div class="imageContainer"> 
+            <div v-for="post in posts" :key="post.id">
+                <Post :post="post"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Post from '../components/ProfilePost.vue'
 import userApi from '../wrappers/UserWrapper.js'
+
 export default {
     data(){
         return{
             username: '',
             posts: [],
-            followers: 0,
+            followers: [],
             bio: '',
             website: ''
         }
     },
+    components:{
+        Post
+    },
     async created(){
         this.username = this.$route.query.username
 
-        await userApi.getUserData(this.username)
+        const response = await userApi.getUserData(this.username)
+        this.username = response.username
+        this.posts = response.posts
+        this.bio = response.bio
+        this.website = response.website
+        this.followers = response.followers
     }
 }
 </script>
@@ -61,7 +75,7 @@ export default {
     height: 20vh;
 }
 
-.imageContainer{
+.profileimageContainer{
     width: 25%;
 }
 
@@ -85,6 +99,11 @@ img{
 .data{
     display: grid;
     grid-template-columns: 200px 200px 200px;
+}
+
+.imageContainer{
+    display:grid;
+    grid-template-columns: 400px 400px;
 }
 
 </style>

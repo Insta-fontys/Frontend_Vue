@@ -16,8 +16,8 @@ export default {
         }
         catch(error){
             response = error.response
-        }
+        }   
         console.log(response)
-        return response
+        return response.data
     }
 }
