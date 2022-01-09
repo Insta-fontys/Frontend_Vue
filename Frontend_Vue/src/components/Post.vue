@@ -1,7 +1,7 @@
 <template>
   <div class="panel">
     <div class="topBar">
-      <label>{{ post.creatorUsername }}</label>
+      <button @click="onProfileNameClick(post.creatorUsername)">{{post.creatorUsername}} </button>
       <button
         class="follow"
         @click="onClickFollow(post.creatorId)"
@@ -59,7 +59,7 @@
 export default {
     name: 'PostItem',
     props: ['post'],
-    emits:["like-post", "react-post", "follow", "donate"],
+    emits:["like-post", "react-post", "follow", "donate", "profile"],
     data(){
         return{
             isLiked: false,
@@ -98,6 +98,9 @@ export default {
                 creatorId: this.post.creatorId
             };
             this.$emit('donate', payload)
+        },
+        onProfileNameClick(name){
+          this.$emit('profile', name)
         }
     },
 }
