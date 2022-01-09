@@ -95,7 +95,6 @@ router.beforeEach((to, from, next) => {
     else {
       const claims = JwtManager.parseJwt(localStorage.getItem("jwt"))
       const isExpired = JwtManager.checkExpiration(claims["exp"])
-      console.log(JwtManager.getRole())
 
       if(isExpired){
         localStorage.removeItem("jwt")
