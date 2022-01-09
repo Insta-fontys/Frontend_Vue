@@ -1,7 +1,6 @@
 <template>
-<button @click="goToProfilePage">test</button>
     <div>
-        <Posts @test="likePost" @reaction="reaction" @follow="follow" @donate="donate" :posts="imagePosts"/>
+        <Posts @test="likePost" @reaction="reaction" @follow="follow" @donate="donate" @profile="goToProfilePage" :posts="imagePosts"/>
     </div>
 </template>
 
@@ -57,8 +56,8 @@ import donateApi from '../wrappers/TokenWrapper.js'
                 alert("thank you for your donation")
             },
 
-            goToProfilePage(){
-                this.$router.push({path: 'profile', query: {username: "admin"}})
+            goToProfilePage(e){
+                this.$router.push({path: 'profile', query: {username: e}})
             }
         }
     }
