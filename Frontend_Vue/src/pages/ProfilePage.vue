@@ -21,7 +21,7 @@
         </div>
         <div class="imageContainer"> 
             <div v-for="post in posts" :key="post.id">
-                <Post :post="post"/>
+                <Post :post="post" class="post"/>
             </div>
         </div>
     </div>
@@ -104,6 +104,19 @@ img{
 .imageContainer{
     display:grid;
     grid-template-columns: 400px 400px;
+    margin-left: 13%;
+    margin-top: 20px;
 }
+
+.post{
+    width: max-content;
+    border: 2px solid black;
+    margin-bottom: 5%;
+    transition: transform .2s;
+}
+
+    .post:hover{
+        transform: scale(1.1);
+    }
 
 </style>
