@@ -54,7 +54,7 @@ import api from '../wrappers/PostWrapper.js'
 <style scoped>
 .panel{
     width: 800px;
-    height: 410px;
+    height: 430px;
     
     position: absolute;
     top:0;
@@ -65,6 +65,8 @@ import api from '../wrappers/PostWrapper.js'
     margin: auto;
     grid-template-rows: 100% 100%;
     grid-template-columns: 50% 50%;
+
+    border: 3px solid black;
 
 }
 
