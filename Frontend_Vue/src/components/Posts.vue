@@ -9,6 +9,7 @@
       @react-post="test"
       @follow="follow"
       @donate="donate"
+      @profile="profile"
     />
   </div>
 </template>
@@ -23,7 +24,7 @@ import Post from '../components/Post.vue'
         props: {
             posts: Array
         },
-        emits: ["test", "reaction", "follow", "donate"],
+        emits: ["test", "reaction", "follow", "donate", "profile"],
         async created(){
             console.log("posts = " + this.posts)
         },
@@ -44,6 +45,10 @@ import Post from '../components/Post.vue'
 
             donate(e){
                 this.$emit('donate', e)
+            },
+
+            profile(e){
+                this.$emit('profile', e)
             }
         },
     }
