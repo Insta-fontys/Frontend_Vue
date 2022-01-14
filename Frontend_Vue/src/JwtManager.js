@@ -22,7 +22,7 @@ export default{
     //Get Role from JWT
     getRole(){
         const claims = this.parseJwt(localStorage.getItem("jwt"))
-        const role = claims["Role"]
+        const role = claims["role"]
         return role
     },
 

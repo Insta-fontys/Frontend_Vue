@@ -6,8 +6,8 @@
         <h1>{{this.prop_name}}</h1>
         <h2>{{this.prop_role}}</h2>
     <div class="links">
-        <div v-if="prop_isCreator" class="holder">
-            <router-link to="/profile"><i class="fas fa-home fa-2x icon"></i></router-link>
+        <div v-if="prop_isCreator" class="holder" @click="goToProfilePage">
+            <i class="fas fa-home fa-2x icon"></i>
         </div>
         <div v-else class="holder">
             <router-link to="/"><i class="fas fa-home fa-2x icon"></i></router-link>
@@ -42,10 +42,12 @@ export default {
     },
     methods:{
         logout(){       
-            console.log("logout")     
             localStorage.removeItem('jwt')
             this.$router.push('login')
         },
+        goToProfilePage(){
+            this.$router.push({path: 'profile', query: {username: this.prop_name}})
+        }
     }
 }
 </script>

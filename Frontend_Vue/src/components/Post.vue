@@ -4,8 +4,7 @@
       <button @click="onProfileNameClick(post.creatorUsername)">{{post.creatorUsername}} </button>
       <button
         class="follow"
-        @click="onClickFollow(post.creatorId)"
-      >
+        @click="onClickFollow(post.creatorId)">
         Follow
       </button>
     </div>
